@@ -1,0 +1,20 @@
+/*
+ * Copyright (c) 2026 Texas Instruments
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+/* The common flash test works on storage_partition. The board file has no free flash,
+ * so the test replaces slot1 (not used by this test) with the partition it needs.
+ */
+/delete-node/ &slot1_partition;
+
+&flash0 {
+	partitions {
+		storage_partition: partition@24000 {
+			compatible = "zephyr,mapped-partition";
+			label = "storage";
+			reg = <0x24000 DT_SIZE_K(112)>;
+		};
+	};
+};
