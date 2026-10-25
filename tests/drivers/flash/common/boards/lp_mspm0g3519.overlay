@@ -1,0 +1,22 @@
+/*
+ * Copyright (c) 2026 Texas Instruments
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+/* The common flash test works on storage_partition. Use the last 4 kB sector group of
+ * flash0 (bank 0, 256 kB); the image sits at the start of the same bank.
+ */
+&flash0 {
+	partitions {
+		ranges;
+		#address-cells = <1>;
+		#size-cells = <1>;
+
+		storage_partition: partition@3f000 {
+			compatible = "zephyr,mapped-partition";
+			label = "storage";
+			reg = <0x3f000 DT_SIZE_K(4)>;
+		};
+	};
+};
